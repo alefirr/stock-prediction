@@ -5,7 +5,8 @@ import { Analysis } from '../Analysis';
 
 export const Layout = () => {
   return (
-    <div>
+    <div className="main-container">
+      <h1>Make profitable stock picks with AI</h1>
       <Search />
       <Analysis />
     </div>

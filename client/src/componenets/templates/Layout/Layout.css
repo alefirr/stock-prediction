@@ -1,0 +1,42 @@
+.main-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 16px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: linear-gradient(to right, #15151c, #313151);
+}
+
+.main-container h1 {
+  background: linear-gradient(to right, #14a5de, #e20c82);
+  background-clip: text;
+  color: transparent;
+}
+
+@media (max-width: 1200px) {
+  .main-container {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  .main-container {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    padding: 4px;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-container {
+    padding: 2px;
+  }
+}
