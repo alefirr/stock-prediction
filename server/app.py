@@ -4,17 +4,25 @@ from sklearn.ensemble import RandomForestClassifier
 import yfinance as yf
 import random
 import requests
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app, origins =['http://localhost:3000', 'http://localhost:3000'])
 
 @app.route('/api/search', methods=['GET'])
 def get_ticker_options():
-    keyword = request.json.get('keyword', '')
+    keyword = request.args.get('keyword', '')
     url = f'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={keyword}&apikey=YHE81J4DG1SUTYGW'
     r = requests.get(url)
     data = r.json()
-    return data['bestMatches']
+    options = data.get('bestMatches', [])
+    formatted_data = [{
+        'symbol': option['1. symbol'],
+        'name': option['2. name']
+    } for option in options]
+
+    return jsonify(formatted_data)
 
 def load_and_prepare_data(stock_ticker):
     start = "1990-01-01"
