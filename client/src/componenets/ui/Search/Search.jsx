@@ -4,8 +4,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 import './Search.css';
 
-export const Search = () => {
-  const [, setTicker] = useState('');
+export const Search = ({ setCurrentTicker }) => {
+  // const [ticker, setTicker] = useState('');
   const [options, setOptions] = useState([]);
 
   const fetchSuggestions = async (keyword) => {
@@ -68,9 +68,11 @@ export const Search = () => {
           options={options.map(
             (option) => `${option['1. symbol']} - ${option['2. name']}`
           )}
-          onInputChange={(_, newInputValue) => {
-            setTicker(newInputValue);
+          onInputChange={(_, newInputValue, reason) => {
             fetchSuggestions(newInputValue);
+            if (reason === 'reset') {
+              setCurrentTicker(newInputValue.split(' ')[0]);
+            }
           }}
           renderInput={(params) => (
             <TextField
